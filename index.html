@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nota Técnica · Obras em Teresina</title>
+<meta name="description" content="Painel interativo de obras públicas executadas e em execução no município de Teresina-PI." />
+
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+
+<!-- Fontes -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="cabecalho">
+  <div class="cabecalho__faixa"></div>
+  <div class="cabecalho__conteudo">
+    <div class="cabecalho__marca">
+      <span class="cabecalho__rotulo">Nota Técnica</span>
+      <h1 class="cabecalho__titulo">Obras Públicas em <em>Teresina</em></h1>
+      <p class="cabecalho__subtitulo">Painel interativo · Dados consolidados SIMO, Convênios e Transferência Direta</p>
+    </div>
+    <div class="cabecalho__indicadores" id="indicadores-cabecalho"></div>
+  </div>
+</header>
+
+<main class="painel">
+
+  <!-- Painel lateral de filtros e lista -->
+  <aside class="lateral" aria-label="Filtros e lista de obras">
+    <section class="filtros">
+      <header class="bloco-titulo">
+        <span class="bloco-titulo__numero">01</span>
+        <h2 class="bloco-titulo__texto">Filtros</h2>
+      </header>
+
+      <div class="campo">
+        <label for="busca">Buscar por descrição, órgão ou bairro</label>
+        <input type="search" id="busca" placeholder="ex.: pavimentação, SEDUC, Angelim…" autocomplete="off" />
+      </div>
+
+      <div class="campo">
+        <label for="filtro-origem">Origem</label>
+        <select id="filtro-origem"><option value="">Todas</option></select>
+      </div>
+
+      <div class="campo">
+        <label for="filtro-categoria">Eixo / Categoria</label>
+        <select id="filtro-categoria"><option value="">Todas</option></select>
+      </div>
+
+      <div class="campo">
+        <label for="filtro-orgao">Órgão / UG</label>
+        <select id="filtro-orgao"><option value="">Todos</option></select>
+      </div>
+
+      <div class="campo">
+        <label for="filtro-status">Situação</label>
+        <select id="filtro-status"><option value="">Todas</option></select>
+      </div>
+
+      <div class="campo">
+        <label for="filtro-zona">Zona</label>
+        <select id="filtro-zona"><option value="">Todas</option></select>
+      </div>
+
+      <div class="filtros__acoes">
+        <button type="button" id="limpar-filtros" class="btn btn--ghost">Limpar filtros</button>
+      </div>
+    </section>
+
+    <section class="lista">
+      <header class="bloco-titulo">
+        <span class="bloco-titulo__numero">02</span>
+        <h2 class="bloco-titulo__texto">Obras encontradas</h2>
+        <span class="lista__contagem" id="lista-contagem">—</span>
+      </header>
+      <div class="lista__container" id="lista-container">
+        <p class="lista__vazio">Carregando…</p>
+      </div>
+    </section>
+  </aside>
+
+  <!-- Mapa -->
+  <section class="mapa-wrapper" aria-label="Mapa interativo">
+    <div id="mapa"></div>
+    <div class="mapa__legenda" id="mapa-legenda" aria-hidden="true">
+      <strong>Origem</strong>
+      <ul></ul>
+      <p class="mapa__legenda-nota">Marcadores em bairros sem coordenada precisa são posicionados no centroide do bairro ou da zona.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="rodape">
+  <div class="rodape__conteudo">
+    <p><strong>Aviso metodológico.</strong> Posicionamento aproximado: cada obra é situada no centroide do bairro informado. Quando ausente, usa-se o centroide da zona ou do município. Dados oriundos das planilhas SIMO, Convênios e Transferência Direta, consolidados em arquivo único.</p>
+    <p class="rodape__creditos">Fonte: planilha consolidada · Renderização: Leaflet + OpenStreetMap · Tipografia: Fraunces / IBM Plex.</p>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
